@@ -1,42 +1,74 @@
 <template>
     <div>
-        <Head :pageTitle="pageTitle" />
-        <Navbar />
-        <main>
-            <slot></slot>
-        </main>
+        <div>
+            <Head :pageTitle="pageTitle" />
+            <Navbar @open-login-modal="showLoginModal = true" />
+            <main>
+                <slot></slot>
+            </main>
+        </div>
+
+        <!-- Modal Login Utama -->
+        <ModalMasuk
+            v-if="showLoginModal"
+            @close="showLoginModal = false"
+            @open-email-login="openEmailLogin"
+        />
+
+        <!-- Modal Login Email -->
+        <ModalLoginEmail
+            v-if="showEmailLoginModal"
+            @close="showEmailLoginModal = false"
+            @back="handleBackToMainLogin"
+            @open-regist="openRegistModal"
+        />
+
+        <!-- Modal Registrasi Email -->
+        <ModalRegistEmail
+            v-if="showRegistModal"
+            @close="showRegistModal = false"
+            @back="handleBackToEmailLogin"
+            @open-login="handleBackToEmailLogin"
+        />
+
         <Footer />
     </div>
 </template>
 
 <script setup>
-// Mengimpor komponen Vue
+import { ref } from 'vue';
 import Head from '../Components/Head.vue';
 import Navbar from '../Components/Navbar.vue';
 import Footer from '../Components/Footer.vue';
+import ModalMasuk from '../Components/ModalMasuk.vue';
+import ModalLoginEmail from '../Components/ModalLoginEmail.vue';
+import ModalRegistEmail from '../Components/ModalRegistEmail.vue';
 
-import '../../../public/assets/js/jquery-3.7.1.min.js';
-// import 'public/assets/js/jquery-3.7.1.min.js';
-// import 'public/assets/js/viewport.jquery.js';
-// import 'public/assets/js/bootstrap.bundle.min.js';
-// import 'public/assets/js/jquery.nice-select.min.js';
-// import 'public/assets/js/jquery.waypoints.js';
-// import 'public/assets/js/jquery.counterup.min.js';
-// import 'public/assets/js/swiper-bundle.min.js';
-// import 'public/assets/js/jquery.meanmenu.min.js';
-// import 'public/assets/js/bootstrap-datepicker.js';
-// import 'public/assets/js/jquery.magnific-popup.min.js';
-// import 'public/assets/js/wow.min.js';
-// import 'public/assets/js/main.js';
-
-// Variabel halaman
 const pageTitle = 'TripGo - Beranda';
+const showLoginModal = ref(false);
+const showEmailLoginModal = ref(false);
+const showRegistModal = ref(false);
 
-// Jika perlu, Anda bisa memindahkan semua skrip JavaScript eksternal ke dalam file public dan tidak mengimpor di sini.
+const openEmailLogin = () => {
+    showLoginModal.value = false;
+    showEmailLoginModal.value = true;
+};
+
+const handleBackToMainLogin = () => {
+    showEmailLoginModal.value = false;
+    showLoginModal.value = true;
+};
+
+const openRegistModal = () => {
+    showEmailLoginModal.value = false;
+    showRegistModal.value = true;
+};
+
+const handleBackToEmailLogin = () => {
+    showRegistModal.value = false;
+    showEmailLoginModal.value = true;
+};
 </script>
-
-<!-- Semua skrip eksternal yang sebelumnya berada di bawah <script src="..."> -->
-
 <style scoped>
 main {
     padding: 20px;

@@ -9,6 +9,38 @@ Route::get('/', function () {
     return inertia('Index');
 });
 
+Route::get('/about-us', function () {
+    return Inertia::render('AboutUs');
+});
+
+Route::get('/berita-update', function () {
+    return Inertia::render('News');
+});
+
+Route::get('/contact-us', function () {
+    return Inertia::render('Contact');
+});
+
+Route::get('/tour/{region}', function ($region) {
+    return Inertia::render('Detailed/Tour', [
+        'region' => ucwords(str_replace('-', ' ', $region))
+    ]);
+});
+
+
+Route::get('/maps', function () {
+    return Inertia::render('Maps/Maps'); 
+})->name('maps'); 
+;
+
+Route::get('/detail-wisata', function () {
+    return Inertia::render('HalamanDetailWisata'); 
+})->name('detail-wisata'); 
+
+Route::get('/detail-update', function () {
+    return Inertia::render('HalamanDetailUpdate'); 
+})->name('detail-update'); 
+
 
 Route::get('/hello', function () {
     return Inertia::render('Welcome', [

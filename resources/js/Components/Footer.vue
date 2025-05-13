@@ -3,7 +3,12 @@
         <div class="footer-content">
             <!-- Logo -->
             <div class="footer-logo">
-                <img src="/images/logo.png" alt="TripGo Logo" class="logo" />
+                <img
+                    src="/assets/img/Logo_TripGo.svg"
+                    alt="TripGo Logo"
+                    class="logo"
+                    style="height: 100px"
+                />
             </div>
 
             <!-- Copyright Info -->
@@ -31,17 +36,17 @@
 
 <script>
 export default {
-    name: "Footer",
+    name: 'Footer',
 };
 </script>
 
 <style scoped>
 .footer {
-    background-color: #f8f8f8;
+    background-color: #caf6ff;
     padding: 20px;
     font-family: Arial, sans-serif;
     color: #333;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #1ba9c9;
 }
 
 .footer-content {

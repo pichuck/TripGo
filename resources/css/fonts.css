@@ -1,0 +1,43 @@
+/* Helvetica Neue */
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('/fonts/helvetica-neue-5/HelveticaNeueRoman.otf')
+        format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('/fonts/helvetica-neue-5/HelveticaNeueBold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Montserrat Alternates */
+@font-face {
+    font-family: 'Montserrat Alternates';
+    src: url('/fonts/montserrat-alternates/MontserratAlternates-Regular.ttf')
+        format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Montserrat Alternates';
+    src: url('/fonts/montserrat-alternates/MontserratAlternates-Bold.ttf')
+        format('truetype');
+    font-weight: 700;
+}
+
+/* Nunito */
+@font-face {
+    font-family: 'Nunito';
+    src: url('/fonts/nunito/Nunito-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('/fonts/nunito/Nunito-Bold.ttf') format('truetype');
+    font-weight: 700;
+}

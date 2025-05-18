@@ -23,6 +23,29 @@
         <!--<< Main.css >>-->
         <link rel="stylesheet" href="assets/css/main.css" />
 
+
+        <!--<< Styling Dashboard >>-->
+    <!-- Jsvectormap plugin css -->
+        <link
+        href="assetsDashboard/libs/jsvectormap/css/jsvectormap.min.css"
+        rel="stylesheet"
+        type="text/css"
+        />
+
+    <!-- Icons css  (Mandatory in All Pages) -->
+        <link
+        href="assetsDashboard/css/icons.min.css"
+        rel="stylesheet"
+        type="text/css"
+        />
+
+    <!-- App css  (Mandatory in All Pages) -->
+        <link
+        href="assetsDashboard/css/app.min.css"
+        rel="stylesheet"
+        type="text/css"
+        />
+
         <!-- Fonts -->
       <link rel="preload" href="/fonts/helvetica-neue-5/HelveticaNeueRoman.otf" as="font" type="font/otf" crossorigin>
       <link rel="preload" href="/fonts/montserrat-alternates/MontserratAlternates-Regular.ttf" as="font" type="font/ttf" crossorigin>
@@ -66,5 +89,29 @@
     <script src="assets/js/wow.min.js"></script>
     <!--<< Main.js >>-->
     <script src="assets/js/main.js"></script>
+
+
+
+    <!--<< Dashboard Js >>-->
+    <!-- Plugin Js (Mandatory in All Pages) -->
+    <script src="assetsDashboard/libs/jquery/jquery.min.js"></script>
+    <script src="assetsDashboard/libs/preline/preline.js"></script>
+    <script src="assetsDashboard/libs/simplebar/simplebar.min.js"></script>
+    <script src="assetsDashboard/libs/iconify-icon/iconify-icon.min.js"></script>
+    <script src="assetsDashboard/libs/node-waves/waves.min.js"></script>
+
+    <!-- App Js (Mandatory in All Pages) -->
+    <script src="assetsDashboard/js/app.js"></script>
+
+    <!-- Apexcharts js -->
+    <script src="assetsDashboard/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Vector Map Js -->
+    <script src="assetsDashboard/libs/jsvectormap/js/jsvectormap.min.js"></script>
+
+    <!-- Dashboard Project Page js -->
+    <script src="assetsDashboard/js/pages/dashboard.js"></script>
+  </body>
+
     </body>
 </html>

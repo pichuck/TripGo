@@ -27,21 +27,21 @@
         <!--<< Styling Dashboard >>-->
     <!-- Jsvectormap plugin css -->
         <link
-        href="assetsDashboard/libs/jsvectormap/css/jsvectormap.min.css"
+        href="assets/libs/jsvectormap/css/jsvectormap.min.css"
         rel="stylesheet"
         type="text/css"
         />
 
     <!-- Icons css  (Mandatory in All Pages) -->
         <link
-        href="assetsDashboard/css/icons.min.css"
+        href="assets/css/icons.min.css"
         rel="stylesheet"
         type="text/css"
         />
 
     <!-- App css  (Mandatory in All Pages) -->
         <link
-        href="assetsDashboard/css/app.min.css"
+        href="assets/css/app.min.css"
         rel="stylesheet"
         type="text/css"
         />
@@ -93,24 +93,24 @@
 
 
     <!--<< Dashboard Js >>-->
-    <!-- Plugin Js (Mandatory in All Pages) -->
-    <script src="assetsDashboard/libs/jquery/jquery.min.js"></script>
-    <script src="assetsDashboard/libs/preline/preline.js"></script>
-    <script src="assetsDashboard/libs/simplebar/simplebar.min.js"></script>
-    <script src="assetsDashboard/libs/iconify-icon/iconify-icon.min.js"></script>
-    <script src="assetsDashboard/libs/node-waves/waves.min.js"></script>
+  <!-- Plugin Js (Mandatory in All Pages) -->
+    {{-- <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/preline/preline.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/iconify-icon/iconify-icon.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script> --}}
 
     <!-- App Js (Mandatory in All Pages) -->
-    <script src="assetsDashboard/js/app.js"></script>
+    {{-- <script src="assets/js/app.js"></script> --}}
 
-    <!-- Apexcharts js -->
-    <script src="assetsDashboard/libs/apexcharts/apexcharts.min.js"></script>
+    {{-- <!-- Apexcharts js -->
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script> --}}
 
     <!-- Vector Map Js -->
-    <script src="assetsDashboard/libs/jsvectormap/js/jsvectormap.min.js"></script>
+    {{-- <script src="assets/libs/jsvectormap/js/jsvectormap.min.js"></script> --}}
 
     <!-- Dashboard Project Page js -->
-    <script src="assetsDashboard/js/pages/dashboard.js"></script>
+    {{-- <script src="assets/js/pages/dashboard.js"></script> --}}
   </body>
 
     </body>

@@ -61,7 +61,7 @@
                     <input
                         type="email"
                         placeholder="Enter your email"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
                     />
                 </div>
 
@@ -73,7 +73,7 @@
                     <input
                         type="password"
                         placeholder="Enter your password"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
                     />
                 </div>
 

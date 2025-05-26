@@ -35,19 +35,19 @@
             <!-- Modal Body -->
             <div class="space-y-4 p-10">
                 <!-- Google Login Button -->
-                <button
-                    @click="handleGoogleLogin"
+                <a
+                    href="/auth/google"
                     class="flex w-full items-center justify-center gap-10 rounded-lg border border-gray-300 bg-white p-3 transition-colors hover:bg-gray-50"
                 >
                     <img
                         src="/assets/img/goggle.jpg"
-                        alt="goggle-logo"
+                        alt="google-logo"
                         style="height: 19px"
                     />
                     <span class="font-medium text-gray-700"
                         >Continue with Google</span
                     >
-                </button>
+                </a>
 
                 <!-- Email Login Button -->
                 <button
@@ -99,8 +99,7 @@
 export default {
     methods: {
         handleGoogleLogin() {
-            // Implement Google login logic
-            console.log('Google login clicked');
+            window.location.href = '/auth/google';
         },
         handleEmailLogin() {
             this.$emit('open-email-login');

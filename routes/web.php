@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Auth\SocialiteController;
 
 Route::get('/', function () {
     return inertia('Index');
@@ -29,22 +30,16 @@ Route::get('/tour/{region}', function ($region) {
 
 
 Route::get('/maps', function () {
-    return Inertia::render('Maps/Maps'); 
-})->name('maps'); 
-;
-
-Route::get('/Dashboard', function () {
-    return Inertia::render('Dashboard/DashboardIndex'); 
-})->name('dashboard'); 
-;
+    return Inertia::render('Maps/Maps');
+})->name('maps');;
 
 Route::get('/detail-wisata', function () {
-    return Inertia::render('HalamanDetailWisata'); 
-})->name('detail-wisata'); 
+    return Inertia::render('HalamanDetailWisata');
+})->name('detail-wisata');
 
 Route::get('/detail-update', function () {
-    return Inertia::render('HalamanDetailUpdate'); 
-})->name('detail-update'); 
+    return Inertia::render('HalamanDetailUpdate');
+})->name('detail-update');
 
 
 Route::get('/hello', function () {
@@ -56,14 +51,18 @@ Route::get('/hello', function () {
     ]);
 });
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-require __DIR__.'/auth.php';
+// Socialite Routes 
+Route::get('/auth/{provider}', [SocialiteController::class, 'redirectToProvider']);
+Route::get('/auth/{provider}/callback', [SocialiteController::class, 'handleProvideCallback']);
+
+require __DIR__ . '/auth.php';

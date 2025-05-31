@@ -168,6 +168,10 @@ const form = useForm({
 const submit = () => {
     form.post(route('register'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
+        onSuccess: () => {
+            // ✅ Reload halaman setelah register sukses
+            window.location.reload();
+        },
     });
 };
 

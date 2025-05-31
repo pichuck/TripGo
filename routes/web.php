@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 
 Route::get('/', function () {
     return inertia('Index');
-});
+})->name('home');
 
 Route::get('/about-us', function () {
     return Inertia::render('AboutUs');
@@ -53,7 +53,7 @@ Route::get('/hello', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/DashboardIndex');
-})->middleware('auth')->name('dashboard');
+})->middleware('auth', 'role:admin')->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

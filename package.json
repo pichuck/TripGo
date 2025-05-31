@@ -33,6 +33,7 @@
     },
     "dependencies": {
         "@tailwindcss/line-clamp": "^0.4.4",
+        "jsvectormap": "^1.7.0",
         "leaflet": "^1.9.4",
         "vue3-leaflet": "^1.0.50"
     }

@@ -25,7 +25,6 @@
                         </svg>
                     </button>
                 </div>
-                <!-- Tombol back -->
                 <div class="flex w-1/3 justify-end">
                     <button
                         @click="closeModal"
@@ -34,7 +33,6 @@
                         &times;
                     </button>
                 </div>
-                <!-- Tombol close -->
             </div>
 
             <!-- Modal Header -->
@@ -59,10 +57,15 @@
                         Email address
                     </label>
                     <input
+                        v-model="form.email"
                         type="email"
                         placeholder="Enter your email"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        class="w-full rounded-lg border px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        :class="{ 'border-red-500': form.errors.email }"
                     />
+                    <div v-if="form.errors.email" class="text-sm text-red-600">
+                        {{ form.errors.email }}
+                    </div>
                 </div>
 
                 <!-- Password Input -->
@@ -71,22 +74,35 @@
                         Password
                     </label>
                     <input
+                        v-model="form.password"
                         type="password"
                         placeholder="Enter your password"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        class="w-full rounded-lg border px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        :class="{ 'border-red-500': form.errors.password }"
                     />
+                    <div
+                        v-if="form.errors.password"
+                        class="text-sm text-red-600"
+                    >
+                        {{ form.errors.password }}
+                    </div>
                 </div>
 
                 <!-- Forgot Password -->
                 <div class="text-right">
-                    <a href="#" class="text-sm text-[#0097b2] hover:underline">
+                    <a
+                        :href="route('password.request')"
+                        class="text-sm text-[#0097b2] hover:underline"
+                    >
                         Forgot password?
                     </a>
                 </div>
 
                 <!-- Sign In Button -->
                 <button
-                    class="w-full rounded-lg bg-[#0097b2] py-3 text-white transition-colors hover:bg-[#007a91]"
+                    @click="submit"
+                    :disabled="form.processing"
+                    class="w-full rounded-lg bg-[#0097b2] py-3 text-white transition-colors hover:bg-[#007a91] disabled:opacity-50"
                 >
                     Sign in
                 </button>
@@ -118,23 +134,31 @@
     </div>
 </template>
 
-<script>
-export default {
-    methods: {
-        closeModal() {
-            this.$emit('close');
-        },
+<script setup>
+import { useForm } from '@inertiajs/vue3';
 
-        handleBack() {
-            this.$emit('back');
+const emit = defineEmits(['close', 'back', 'open-regist']);
+
+const form = useForm({
+    email: '',
+    password: '',
+    remember: false,
+});
+
+const submit = () => {
+    form.post(route('login'), {
+        onSuccess: () => {
+            form.reset('password');
+            emit('close');
         },
-    },
+    });
+};
+
+const closeModal = () => {
+    emit('close');
+};
+
+const handleBack = () => {
+    emit('back');
 };
 </script>
-
-<style scoped>
-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 151, 178, 0.2);
-}
-</style>

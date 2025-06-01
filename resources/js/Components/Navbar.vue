@@ -1,5 +1,5 @@
 <template>
-    <nav class="font-nunito bg-white">
+    <nav class="bg-white font-nunito">
         <div class="mx-auto max-w-7xl px-4 py-3">
             <div class="flex items-center justify-between">
                 <Link href="/" class="text-4xl font-bold text-[#1ba9c9]">
@@ -63,12 +63,26 @@
 
                 <!-- Right Side Button -->
                 <div class="flex items-center space-x-4">
-                    <button
-                        @click="$emit('open-login-modal')"
-                        class="rounded-full bg-[#1ba9c9] px-6 py-3 text-lg text-white hover:bg-[#14819c]"
-                    >
-                        Masuk
-                    </button>
+                    <template v-if="$page.props.auth.user">
+                        <!-- Logout -->
+                        <form @submit.prevent="logout" method="post">
+                            <button
+                                type="submit"
+                                class="rounded-full bg-red-500 px-6 py-3 text-lg text-white hover:bg-red-600"
+                            >
+                                Logout
+                            </button>
+                        </form>
+                    </template>
+                    <template v-else>
+                        <!-- Login -->
+                        <button
+                            @click="$emit('open-login-modal')"
+                            class="rounded-full bg-[#1ba9c9] px-6 py-3 text-lg text-white hover:bg-[#14819c]"
+                        >
+                            Masuk
+                        </button>
+                    </template>
                 </div>
             </div>
         </div>
@@ -86,6 +100,11 @@ export default {
         return {
             isMenuOpen: false,
         };
+    },
+    methods: {
+        logout() {
+            this.$inertia.post('/logout');
+        },
     },
 };
 </script>

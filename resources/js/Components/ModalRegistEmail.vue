@@ -37,8 +37,8 @@
             </div>
 
             <!-- Modal Header -->
-            <div class="border-b p-6">
-                <div class="flex flex-col items-center gap-4">
+            <div class="border-b p-4">
+                <div class="flex flex-col items-center gap-2">
                     <h1 class="text-center text-2xl font-bold text-gray-800">
                         Join to unlock the best of TripGo
                     </h1>
@@ -46,64 +46,83 @@
             </div>
 
             <!-- Modal Body -->
-            <div class="space-y-6 p-6">
-                <!-- Name Inputs -->
-                <!-- Name Inputs -->
-                <div class="grid grid-cols-2 gap-4">
-                    <!-- First Name -->
-                    <div class="space-y-2">
-                        <label class="block text-sm font-medium text-gray-700">
-                            First Name
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="First Name"
-                            class="w-full rounded-lg border-gray-300 px-4 py-3 text-gray-900 focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
-                        />
-                    </div>
-
-                    <!-- Last Name -->
-                    <div class="space-y-2">
-                        <label class="block text-sm font-medium text-gray-700">
-                            Last Name
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="Last Name"
-                            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
-                        />
-                    </div>
-                </div>
-
-                <!-- Email Input -->
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="col-span-2 space-y-2">
-                        <!-- Gunakan col-span-2 -->
-                        <label class="block text-sm font-medium text-gray-700">
-                            Email address
-                        </label>
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
-                        />
-                    </div>
-                </div>
-                <!-- Password Input -->
+            <div class="space-y-2 p-2">
+                <!-- Name -->
                 <div class="space-y-2">
-                    <label class="block text-sm font-medium text-gray-700">
-                        Create a password
-                    </label>
+                    <label class="block text-sm font-medium text-gray-700"
+                        >Name</label
+                    >
+                    <input
+                        type="text"
+                        v-model="form.name"
+                        placeholder="Name"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        autocomplete="name"
+                    />
+                    <p v-if="form.errors.name" class="text-sm text-red-500">
+                        {{ form.errors.name }}
+                    </p>
+                </div>
+
+                <!-- Email -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700"
+                        >Email address</label
+                    >
+                    <input
+                        type="email"
+                        v-model="form.email"
+                        placeholder="Email"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        autocomplete="username"
+                    />
+                    <p v-if="form.errors.email" class="text-sm text-red-500">
+                        {{ form.errors.email }}
+                    </p>
+                </div>
+
+                <!-- Password -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700"
+                        >Password</label
+                    >
                     <input
                         type="password"
+                        v-model="form.password"
                         placeholder="Password"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        autocomplete="new-password"
                     />
+                    <p v-if="form.errors.password" class="text-sm text-red-500">
+                        {{ form.errors.password }}
+                    </p>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700"
+                        >Confirm Password</label
+                    >
+                    <input
+                        type="password"
+                        v-model="form.password_confirmation"
+                        placeholder="Confirm Password"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-black focus:border-[#0097b2] focus:ring-2 focus:ring-[#0097b2]/50"
+                        autocomplete="new-password"
+                    />
+                    <p
+                        v-if="form.errors.password_confirmation"
+                        class="text-sm text-red-500"
+                    >
+                        {{ form.errors.password_confirmation }}
+                    </p>
                 </div>
 
                 <!-- Join Button -->
                 <button
-                    class="w-full rounded-lg bg-[#0097b2] py-3 text-white transition-colors hover:bg-[#007a91]"
+                    @click="submit"
+                    :disabled="form.processing"
+                    class="mt-4 w-full rounded-lg bg-[#0097b2] py-3 text-white transition-colors hover:bg-[#007a91]"
                 >
                     Join
                 </button>
@@ -134,20 +153,31 @@
     </div>
 </template>
 
-<script>
-export default {
-    methods: {
-        closeModal() {
-            this.$emit('close');
+<script setup>
+import { useForm } from '@inertiajs/vue3';
+
+const emit = defineEmits(['close', 'back', 'open-login']);
+
+const form = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+});
+
+const submit = () => {
+    form.post(route('register'), {
+        onFinish: () => form.reset('password', 'password_confirmation'),
+        onSuccess: () => {
+            // ✅ Reload halaman setelah register sukses
+            window.location.reload();
         },
-        handleBack() {
-            this.$emit('back');
-        },
-        handleLogin() {
-            this.$emit('open-login');
-        },
-    },
+    });
 };
+
+const closeModal = () => emit('close');
+const handleBack = () => emit('back');
+const handleLogin = () => emit('open-login');
 </script>
 
 <style scoped></style>

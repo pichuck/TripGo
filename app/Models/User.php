@@ -11,10 +11,11 @@ use Laratrust\Contracts\LaratrustUser;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements LaratrustUser
 {
+    use HasRolesAndPermissions;
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRolesAndPermissions;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.

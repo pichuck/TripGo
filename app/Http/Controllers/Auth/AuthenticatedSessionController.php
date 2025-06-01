@@ -13,17 +13,10 @@ use Inertia\Response;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-    public function create(): Response
+    public function create()
     {
-        return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
-        ]);
+        return redirect('/');
     }
-
     /**
      * Handle an incoming authentication request.
      */
@@ -32,6 +25,17 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $user = Auth::user();
+        $roles = $user->roles->pluck('name')->toArray();
+
+        $users = [
+            'users',
+        ];
+
+        if (array_intersect($roles, $users)) {
+            return redirect()->route('home');
+        }
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

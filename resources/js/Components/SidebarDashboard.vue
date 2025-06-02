@@ -36,11 +36,33 @@
                 <li class="menu-item">
                     <a
                         class="text-default-700 hover:bg-default-900/5 group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium transition-all"
-                        href="app-calendar.html"
+                        href="/admin/user"
                     >
                         <i class="material-symbols-rounded text-2xl">group</i>
                         <!-- Sama dengan Total Users -->
                         Manage Users
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a
+                        class="text-default-700 hover:bg-default-900/5 group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium transition-all"
+                        href="/admin/role"
+                    >
+                        <i class="material-symbols-rounded text-2xl">group</i>
+                        <!-- Sama dengan Total Users -->
+                        Manage Roles
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a
+                        class="text-default-700 hover:bg-default-900/5 group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium transition-all"
+                        href="/admin/permission"
+                    >
+                        <i class="material-symbols-rounded text-2xl">group</i>
+                        <!-- Sama dengan Total Users -->
+                        Manage Permissions
                     </a>
                 </li>
 

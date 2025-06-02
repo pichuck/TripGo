@@ -54,4 +54,9 @@ class User extends Authenticatable implements LaratrustUser
     {
         return $this->hasMany(SocialAccount::class);
     }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

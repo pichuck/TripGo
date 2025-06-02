@@ -50,6 +50,8 @@
       <link rel="preload" href="/fonts/helvetica-neue-5/HelveticaNeueRoman.otf" as="font" type="font/otf" crossorigin>
       <link rel="preload" href="/fonts/montserrat-alternates/MontserratAlternates-Regular.ttf" as="font" type="font/ttf" crossorigin>
       <link rel="preload" href="/fonts/nunito/Nunito-Regular.ttf" as="font" type="font/ttf" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 
 
       {{-- leaflet --}}
@@ -62,7 +64,7 @@
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
-    <body class="font-Nunito">
+    <body class="font-Nunito bg-white">
         @inertia
 
         <!--<< All JS Plugins >>-->

@@ -6,7 +6,7 @@
                     <div class="col-lg-6">
                         <div class="about-image">
                             <img
-                                src="\assets\img\bnr_abt.png"
+                                src="/assets/img/bnr_abt.png"
                                 alt="Sistem AI"
                                 class="wow img-custom-anim-left"
                             />
@@ -18,13 +18,13 @@
                             </div>
                             <div class="group-image float-bob-x">
                                 <img
-                                    src="assets\img\tripgo_ai.png"
+                                    src="/assets/img/tripgo_ai.png"
                                     alt="Travelers"
                                 />
                             </div>
                             <div class="about-image-2">
                                 <img
-                                    src="\assets\img\Mockup.png"
+                                    src="/assets/img/Mockup.png"
                                     alt="Antarmuka Rekomendasi"
                                     class="wow img-custom-anim-top"
                                     data-wow-duration="1.5s"
@@ -112,16 +112,12 @@
                                 </div>
                             </div>
 
-                            <a
-                                href="/recommendation"
+                            <Link
+                                :href="route('SearchDestinasi')"
                                 class="inline-flex items-center rounded-lg bg-[#113d48] px-6 py-3 text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#0097b2] hover:shadow-lg"
-                                data-wow-delay=".9s"
                             >
-                                Coba Sekarang
-                                <i
-                                    class="fa-sharp fa-regular fa-arrow-right ml-2"
-                                ></i>
-                            </a>
+                                <a href="/TripBuilder">Coba Ai</a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -131,7 +127,9 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/vue3';
+
 export default {
-    name: 'AboutSystem',
+    name: 'AboutSection',
 };
 </script>

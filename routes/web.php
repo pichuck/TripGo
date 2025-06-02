@@ -32,6 +32,10 @@ Route::get('/tour/{region}', function ($region) {
     ]);
 });
 
+Route::get('/TripBuilder', function () {
+    return Inertia::render('Ai/SearchDestinasi'); 
+})->name('SearchDestinasi');
+
 
 Route::get('/maps', function () {
     return Inertia::render('Maps/Maps');
@@ -45,6 +49,11 @@ Route::get('/detail-update', function () {
     return Inertia::render('HalamanDetailUpdate');
 })->name('detail-update');
 
+
+
+route::get('/TripBuilder_preview', function () {
+    return Inertia::render('Ai/RekomendasiAi');
+})->name('RekomendasiAi');
 
 Route::get('/hello', function () {
     return Inertia::render('Welcome', [

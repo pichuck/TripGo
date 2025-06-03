@@ -5,6 +5,10 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return inertia('Index');
@@ -62,7 +66,19 @@ Route::get('/hello', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/DashboardIndex');
-})->middleware('auth', 'role:admin')->name('dashboard');
+})->middleware(['auth', 'role:administrator'])->name('dashboard');
+
+Route::name('admin.')->prefix('admin')->namespace('App\Http\Controllers\Admin')->middleware(['auth', 'role:superadministrator'])->group(function () {
+    Route::resource('user', 'UserController');
+    Route::resource('role', 'RoleController');
+    Route::resource('permission', 'PermissionController');
+});
+
+Route::get('articles', [ArticleController::class, 'index']);
+Route::get('articles/{id}', [ArticleController::class, 'show']);
+Route::post('articles', [ArticleController::class, 'store']);
+Route::put('articles/{id}', [ArticleController::class, 'update']);
+Route::delete('articles/{id}', [ArticleController::class, 'destroy']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

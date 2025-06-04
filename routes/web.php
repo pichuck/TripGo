@@ -9,6 +9,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\ArticleController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return inertia('Index');
@@ -55,9 +58,15 @@ Route::get('/hello', function () {
     ]);
 });
 
+Route::middleware('auth')->get('/api/user', function (Request $request) {
+    return response()->json([
+        'role' => $request->user()->roles->pluck('name'),
+    ]);
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/DashboardIndex');
-})->middleware(['auth', 'role:administrator'])->name('dashboard');
+})->middleware(['auth', 'role:administrator|superadministrator'])->name('dashboard');
 
 Route::name('admin.')->prefix('admin')->namespace('App\Http\Controllers\Admin')->middleware(['auth', 'role:superadministrator'])->group(function () {
     Route::resource('user', 'UserController');

@@ -37,6 +37,22 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('home');
         }
 
+        $admin = [
+            'administrator',
+        ];
+
+        if (array_intersect($roles, $admin)) {
+            return redirect()->route('dashboard');
+        }
+
+        $superadmin = [
+            'administrator',
+        ];
+
+        if (array_intersect($roles, $superadmin)) {
+            return redirect()->route('dashboard');
+        }
+
         return redirect('dashboard');
     }
 

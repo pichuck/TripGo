@@ -7,55 +7,27 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About TripGo
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+TripGo is an innovative web platform designed to enhance the travel experience. Our mission is to provide users with seamless trip planning and real-time updates, ensuring every journey is unforgettable. TripGo combines cutting-edge technology with a user-friendly interface, providing tools and resources needed for a flawless travel experience.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Key Features:
+- [Machine Learning GitHub Repository](https://github.com/AnasKhalif/ML-TripGo)
+- [Demo on YouTube](https://youtu.be/B_89GZa1BLM)
+- [Project Proposal Link](https://drive.google.com/file/d/1k0QTGWXVz5efAE3m2QI0w9dyVO7ozHT8/view?usp=drive_link)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Learning TripGo
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+TripGo provides extensive documentation to help you get started with the platform and integrate it into your travel services. You can explore the project through our [GitHub Repository](https://github.com/your-repository-link) to see how the system works and how to leverage machine learning for better travel planning.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+We welcome contributions to the TripGo project. If you're interested in improving TripGo, please visit our [GitHub Repository](https://github.com/your-repository-link) for guidelines on how to contribute.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you discover any security vulnerability in TripGo, please contact us immediately via [your-email@example.com](mailto:your-email@example.com). We will address all security issues promptly.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+TripGo is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-### Key Features:
+### Link Machine Learning, Demo Youtube, Proposal :
 - [Machine Learning GitHub Repository](https://github.com/AnasKhalif/ML-TripGo)
 - [Demo on YouTube](https://youtu.be/B_89GZa1BLM)
 - [Project Proposal Link](https://drive.google.com/file/d/1k0QTGWXVz5efAE3m2QI0w9dyVO7ozHT8/view?usp=drive_link)

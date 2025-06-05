@@ -7,10 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About TripGo
-
-TripGo is an innovative web platform designed to enhance the travel experience. Our mission is to provide users with seamless trip planning and real-time updates, ensuring every journey is unforgettable. TripGo combines cutting-edge technology with a user-friendly interface, providing tools and resources needed for a flawless travel experience.
-
 ### Key Features:
 - [Machine Learning GitHub Repository](https://github.com/AnasKhalif/ML-TripGo)
 - [Demo on YouTube](https://youtu.be/B_89GZa1BLM)

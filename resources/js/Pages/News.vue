@@ -1,7 +1,15 @@
 <template>
     <MainLayout @open-login-modal="showLoginModal = true">
         <section class="breadcrumb-wrapper fix bg-cover">
-            <div class="container">
+            <div
+                class="container"
+                :style="{
+                    backgroundImage: 'url(/assets/img/Article-bnr.jpg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                }"
+            >
                 <div class="row">
                     <div class="page-heading">
                         <h2>Berita & Update</h2>

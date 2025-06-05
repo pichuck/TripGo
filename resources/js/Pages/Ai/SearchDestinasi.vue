@@ -9,7 +9,7 @@
                         class="absolute left-0 right-0 top-1/2 -z-10 h-1 -translate-y-1/2 bg-gray-200"
                     ></div>
                     <div
-                        class="bg-primary absolute left-0 top-1/2 -z-10 h-1 -translate-y-1/2 transition-all duration-500"
+                        class="absolute left-0 top-1/2 -z-10 h-1 -translate-y-1/2 bg-primary transition-all duration-500"
                         :style="`width: ${progress}%;`"
                     ></div>
 
@@ -62,7 +62,6 @@
 
             <!-- Dynamic Component -->
             <div
-                class="transition-all duration-300"
                 :class="{
                     'opacity-0': changingStep,
                     'opacity-100': !changingStep,
@@ -74,8 +73,18 @@
                     @next-step="nextStep"
                     @prev-step="prevStep"
                     @update-form-data="updateFormData"
-                    @submit-form="submitForm"
                 />
+            </div>
+
+            <!-- Submit Button (Only visible on last step) -->
+            <div v-if="step === 3" class="mt-8 text-center">
+                <button
+                    @click="submitForm"
+                    class="next-btn rounded-full bg-primary px-12 py-4 text-lg font-medium text-white shadow-lg transition-all hover:bg-blue-700 disabled:opacity-50"
+                >
+                    Submit
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </button>
             </div>
         </div>
     </MainLayout>
@@ -87,6 +96,7 @@ import AiSearchEngine from '../../Components/AiSearchEnggine.vue';
 import AiPilihTanggal from '../../Components/AiPilihTanggal.vue';
 import AiPilihCategory from '../../Components/AiPilihCategory.vue';
 import { ref, computed } from 'vue';
+import axios from 'axios';
 
 export default {
     components: {
@@ -104,12 +114,12 @@ export default {
             categories: [],
         });
 
-        // Menghitung progress bar (dalam persen)
+        // Progress Bar (Persen Progress berdasarkan Step)
         const progress = computed(() => {
-            return (step.value - 1) * 50; // Karena ada 3 step, maka per step 50% (dari 0% ke 100%)
+            return (step.value - 1) * 50; // 3 step, setiap step 50%
         });
 
-        // Komponen yang ditampilkan berdasarkan step
+        // Step Component yang aktif
         const currentStepComponent = computed(() => {
             switch (step.value) {
                 case 1:
@@ -123,7 +133,7 @@ export default {
             }
         });
 
-        // Fungsi untuk pindah ke step berikutnya dengan animasi
+        // Fungsi Next Step
         const nextStep = () => {
             changingStep.value = true;
             setTimeout(() => {
@@ -134,7 +144,7 @@ export default {
             }, 300);
         };
 
-        // Fungsi untuk kembali ke step sebelumnya dengan animasi
+        // Fungsi Previous Step
         const prevStep = () => {
             changingStep.value = true;
             setTimeout(() => {
@@ -145,24 +155,37 @@ export default {
             }, 300);
         };
 
-        // Fungsi untuk update data form dari child component
+        // Update Form Data
         const updateFormData = (data) => {
             formData.value = { ...formData.value, ...data };
         };
 
-        // Fungsi untuk submit form akhir
-        const submitForm = () => {
-            console.log('Form data to submit:', formData.value);
-            // Di sini Anda bisa lakukan:
-            // 1. Kirim data ke backend untuk diproses AI
-            // 2. Redirect ke halaman hasil rekomendasi
-            // 3. Tampilkan loading indicator
+        // Submit Form untuk Mengirim Data ke Laravel
+        const submitForm = async () => {
+            const formDataToSend = {
+                query: formData.value.destination.name, // Nama kota dari formData
+                category: formData.value.categories,
+                dateRange: formData.value.dateRange,
+            };
 
-            // Contoh:
-            // axios.post('/api/generate-recommendations', formData.value)
-            //   .then(response => {
-            //       // Redirect ke halaman hasil
-            //   });
+            try {
+                const response = await axios.post(
+                    '/api/tour-recommendations',
+                    formDataToSend,
+                );
+                // Terima rekomendasi dari Flask melalui Laravel
+                const recommendations = response.data;
+
+                // Redirect atau lakukan hal lain setelah menerima hasil rekomendasi
+                // Contoh bisa menggunakan Inertia untuk redirect ke halaman rekomendasi
+                this.$router.push({
+                    name: 'RekomendasiAi',
+                    params: { recommendations },
+                });
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
         };
 
         return {

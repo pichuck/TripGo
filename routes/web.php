@@ -45,7 +45,13 @@ Route::get('/detail-update', function () {
     return Inertia::render('HalamanDetailUpdate');
 })->name('detail-update');
 
+Route::post('/get-recommendations', [RecommendationController::class, 'getRecommendations']);
 
+
+Route::get('/kontribusi/tambah-wisata
+', function () {
+    return Inertia::render('TambahWisata');
+})->name('TambahWisata');
 
 route::get('/TripBuilder_preview', function () {
     return Inertia::render('Ai/RekomendasiAi');

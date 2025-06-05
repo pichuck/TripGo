@@ -80,30 +80,14 @@
             </section>
 
             <!-- Cta Section Start -->
-            <section class="cta-section section-padding">
-                <div class="container">
-                    <div class="row g-4">
-                        <CtaLokasi
-                            v-for="(lokasi, index) in ctaLokasi"
-                            :key="index"
-                            :location="lokasi.location"
-                            :street="lokasi.street"
-                            :range="lokasi.range"
-                            :recomendation="lokasi.recomendation"
-                        />
-                        <CtaCuaca
-                            v-for="(cuaca, index) in ctacuaca"
-                            :key="'cuaca-' + index"
-                            :location="cuaca.location"
-                            :lastUpdate="cuaca.lastUpdate"
-                            :temperature="cuaca.temperature"
-                            :humidity="cuaca.humidity"
-                            :windSpeed="cuaca.windSpeed"
-                            :rainfall="cuaca.rainfall"
-                        />
-                    </div>
-                </div>
-            </section>
+            <CtaLokasi
+                v-for="(lokasi, index) in ctaLokasi"
+                :key="index"
+                :location="lokasi.location"
+                :street="lokasi.street"
+                :range="lokasi.range"
+                :recomendation="lokasi.recomendation"
+            />
 
             <AboutSection />
 
@@ -136,25 +120,17 @@
                                 anda
                             </span>
                         </div>
-                        <a
-                            href="tour-details.html"
-                            class="inline-flex items-center rounded-lg bg-[#113d48] px-6 py-3 text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#0097b2] hover:shadow-lg"
-                            data-wow-delay=".5s"
-                        >
-                            Lihat Semua
-                            <i
-                                class="fa-sharp fa-regular fa-arrow-right ml-2"
-                            ></i>
-                        </a>
                     </div>
                     <div class="row">
                         <div
                             v-for="(destination, index) in destinations"
-                            :key="index"
+                            :key="destination.id || index"
                             class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp"
                             :data-wow-delay="`0.${index + 2}s`"
                         >
                             <CardDestination
+                                :id="destination.id"
+                                :slug="destination.slug"
                                 :image="destination.image"
                                 :location="destination.location"
                                 :rating="destination.rating"
@@ -166,38 +142,167 @@
                 </div>
             </section>
 
-            <!-- INI BAGIAN ARTIKEL -->
-            <section class="news-section section-padding fix">
-                <div class="container">
-                    <div class="section-title space-y-3 text-center">
-                        <h3
-                            class="wow fadeInUp mb-2 text-3xl font-bold uppercase tracking-wider text-gray-700"
-                        >
-                            News & Updates
-                        </h3>
-                        <span
-                            class="wow fadeInUp block text-4xl font-semibold leading-tight text-gray-900"
-                            data-wow-delay=".2s"
-                        >
-                            Our Latest News & Articles
-                        </span>
-                    </div>
-                    <div class="row">
-                        <div
-                            v-for="(news, index) in newsItems"
-                            :key="index"
-                            class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp"
-                            :data-wow-delay="`0.${(index % 3) * 2 + 3}s`"
-                        >
-                            <NewsCard
-                                :type="news.type"
-                                :image="news.image"
-                                :date="news.date"
-                                :tag="news.tag"
-                                :title="news.title"
-                                :with-popup="news.withPopup"
-                            />
+            <!-- SECTION KONTRIBUSI USER -->
+            <section class="py-16">
+                <div class="container mx-auto px-4">
+                    <div class="mx-auto max-w-4xl text-center">
+                        <div class="mb-8">
+                            <h2
+                                class="wow fadeInUp mb-4 text-3xl font-bold text-gray-800 md:text-4xl"
+                            >
+                                <strong
+                                    >Bagikan Tempat Wisata Favoritmu!</strong
+                                >
+                            </h2>
+                            <p
+                                class="wow fadeInUp mb-6 text-lg text-gray-600"
+                                data-wow-delay=".2s"
+                            >
+                                Punya rekomendasi tempat wisata yang menakjubkan
+                                di Pulau Jawa? Bantu sesama traveler dengan
+                                berbagi pengalaman dan destinasi tersembunyimu!
+                            </p>
                         </div>
+
+                        <div class="mb-8 grid gap-6 md:grid-cols-3">
+                            <div
+                                class="wow fadeInUp text-center"
+                                data-wow-delay=".3s"
+                            >
+                                <div
+                                    class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500"
+                                >
+                                    <svg
+                                        class="h-8 w-8 text-white"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                        ></path>
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <h3
+                                    class="mb-2 text-xl font-semibold text-gray-800"
+                                >
+                                    Lokasi Unik
+                                </h3>
+                                <p class="text-gray-600">
+                                    Ceritakan tentang tempat tersembunyi yang
+                                    belum banyak orang tahu
+                                </p>
+                            </div>
+
+                            <div
+                                class="wow fadeInUp text-center"
+                                data-wow-delay=".4s"
+                            >
+                                <div
+                                    class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-500"
+                                >
+                                    <svg
+                                        class="h-8 w-8 text-white"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                                        ></path>
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <h3
+                                    class="mb-2 text-xl font-semibold text-gray-800"
+                                >
+                                    Foto & Cerita
+                                </h3>
+                                <p class="text-gray-600">
+                                    Bagikan foto dan pengalaman seru selama
+                                    berkunjung ke sana
+                                </p>
+                            </div>
+
+                            <div
+                                class="wow fadeInUp text-center"
+                                data-wow-delay=".5s"
+                            >
+                                <div
+                                    class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-500"
+                                >
+                                    <svg
+                                        class="h-8 w-8 text-white"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <h3
+                                    class="mb-2 text-xl font-semibold text-gray-800"
+                                >
+                                    Bantu Traveler
+                                </h3>
+                                <p class="text-gray-600">
+                                    Kontribusimu akan membantu ribuan traveler
+                                    menemukan destinasi baru
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="wow fadeInUp" data-wow-delay=".6s">
+                            <Link
+                                href="/kontribusi/tambah-wisata"
+                                class="inline-flex transform items-center rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl"
+                            >
+                                <svg
+                                    class="mr-2 h-5 w-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                    ></path>
+                                </svg>
+                                Tambahkan Tempat Wisata
+                            </Link>
+                        </div>
+
+                        <p
+                            class="wow fadeInUp mt-4 text-sm text-gray-500"
+                            data-wow-delay=".7s"
+                        >
+                            Setiap kontribusi akan diverifikasi terlebih dahulu
+                            untuk memastikan kualitas informasi
+                        </p>
                     </div>
                 </div>
             </section>
@@ -212,67 +317,11 @@ import CardDestination from '../Components/cardDestination.vue';
 import NewsCard from '../Components/NewsCard.vue';
 import AboutSection from '../Components/AboutSection.vue';
 import CtaLokasi from '../Components/CtaLokasi.vue';
-import CtaCuaca from '../Components/CtaCuaca.vue';
 import HeaderBar from '@/Components/HeaderBar.vue';
+// Import destinations dari file terpisah
+import destinationsData from '../../data/destinations.js';
 
-const destinations = [
-    {
-        image: 'assets/img/destination/01.jpg',
-        location: 'Indonesia',
-        rating: '4.7',
-        title: 'Brooklyn Beach Resort Tour',
-        price: '120000',
-    },
-    {
-        image: 'assets/img/destination/02.jpg',
-        location: 'Indonesia',
-        rating: '4.7',
-        title: 'Pak Chumphon Town Tour',
-        price: '120000',
-    },
-    {
-        image: 'assets/img/destination/03.jpg',
-        location: 'Indonesia',
-        rating: '4.7',
-        title: 'Java & Bali One Life Adventure',
-        price: '120000',
-    },
-    {
-        image: 'assets/img/destination/04.jpg',
-        location: 'Indonesia',
-        rating: '4.7',
-        title: 'Places To Travel In November',
-        price: '120000',
-    },
-    {
-        image: 'assets/img/destination/05.jpg',
-        location: 'Indonesia',
-        rating: '4.7',
-        title: 'Brooklyn Beach Resort Tour',
-        price: '120000',
-    },
-    {
-        image: 'assets/img/destination/06.jpg',
-        location: 'Indonesia',
-        rating: '4.7',
-        title: 'Pak Chumphon Town Tour',
-        price: '120000',
-    },
-    {
-        image: 'assets/img/destination/07.jpg',
-        location: 'Indonesia',
-        rating: '4.7',
-        title: 'Brooklyn Beach Resort Tour',
-        price: '120000',
-    },
-    {
-        image: 'assets/img/destination/08.jpg',
-        location: 'Indonesia',
-        rating: '4.7',
-        title: 'Java & Bali One Life Adventure',
-        price: '120000',
-    },
-];
+const destinations = destinationsData.slice(0, 8); // Ambil 8 destinasi pertama
 
 const newsItems = [
     {
@@ -314,19 +363,6 @@ const ctaLokasi = [
         street: 'Jl. Pantai Indah Kapuk No. 88',
         range: '500m dari Pantai',
         recomendation: '25+ Kuliner Terdekat',
-    },
-];
-
-const ctacuaca = [
-    {
-        location: 'Bandung',
-        lastUpdate:
-            'Update Terakhir: ' + new Date().toLocaleTimeString('id-ID'),
-        temperature: '28°C',
-        humidity: 'Kelembapan 70%',
-        windSpeed: 'Angin 8 km/jam',
-        rainfall: 'Curah Hujan 2 mm',
-        image: 'assets/img/cuaca-bandung.png',
     },
 ];
 

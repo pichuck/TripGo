@@ -2,7 +2,15 @@
     <MainLayout @open-login-modal="showLoginModal = true">
         <!-- breadcrumb-wrappe-Section Start -->
         <section class="breadcrumb-wrapper fix bg-cover">
-            <div class="container">
+            <div
+                class="container"
+                :style="{
+                    backgroundImage: 'url(/assets/img/contact-bnr.jpg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                }"
+            >
                 <div class="row">
                     <div class="page-heading">
                         <h2>Contact Us</h2>

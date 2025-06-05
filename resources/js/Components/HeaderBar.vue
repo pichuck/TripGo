@@ -186,6 +186,7 @@
                         <div class="flex flex-wrap justify-center gap-2">
                             <button
                                 v-for="suggestion in [
+                                    'Pantai Sendiki',
                                     'Bromo',
                                     'Bali',
                                     'Bandung',
@@ -243,6 +244,9 @@ const selectedIndex = ref(-1);
 const recentSearches = ref([]);
 const modalInput = ref(null);
 
+// Emit events to parent component
+const emit = defineEmits(['destination-selected', 'navigate-to-detail']);
+
 // Watch untuk showSuggestions: ketika modal muncul, fokus ke input modal
 watch(showSuggestions, (newVal) => {
     if (newVal) {
@@ -257,41 +261,101 @@ watch(showSuggestions, (newVal) => {
     }
 });
 
-// Data dummy untuk simulasi
+// Data dummy untuk simulasi dengan Pantai Sendiki
 const allDestinations = [
+    // Pantai Sendiki - Data Lengkap
+    {
+        id: 'pantai-sendiki',
+        name: 'Pantai Sendiki',
+        type: 'Wisata',
+        location: 'Malang, Jawa Timur',
+        rating: 4.7,
+        // Data lengkap untuk detail
+        title: 'Pantai Sendiki',
+        price: '15.000',
+        address:
+            'Desa Tambakrejo, Kecamatan Sumbermanjing Wetan, Kabupaten Malang, Jawa Timur',
+        image: '/assets/img/pantai-sendiki.jpg',
+        coordinates: [-8.3405, 112.6867], // Koordinat Pantai Sendiki
+        categories: ['Pantai', 'Wisata Alam', 'Fotografi'],
+        description:
+            'Pantai Sendiki adalah salah satu pantai tersembunyi di Malang Selatan yang menawarkan keindahan alam yang masih alami. Pantai ini terkenal dengan pasir putihnya yang halus, air laut yang jernih, dan suasana yang tenang jauh dari keramaian.',
+        fullDescription:
+            'Pantai Sendeki memiliki karakteristik unik dengan tebing-tebing karang yang menjulang tinggi di sekitarnya. Ombak di pantai ini cukup tenang sehingga cocok untuk berenang dan bermain air. Pemandangan sunset di Pantai Sendiki juga sangat memukau, menjadikannya spot favorit untuk fotografi. Akses menuju pantai ini memang sedikit menantang dengan jalan yang berkelok, namun keindahan yang ditawarkan sangat sebanding dengan perjalanan yang dilakukan.',
+        facilities: [
+            'Area Parkir',
+            'Warung Makan',
+            'Toilet Umum',
+            'Gazebo',
+            'Area Camping',
+            'Spot Foto',
+            'Jalur Trekking',
+        ],
+        nearbyLodging: [
+            'Homestay Pak Slamet (2.5 km)',
+            'Villa Pantai Sendiki (1.8 km)',
+            'Penginapan Bahari (3.2 km)',
+            'Cottage Sendiki View (2.1 km)',
+        ],
+        nearbyFood: [
+            'Warung Bu Tini - Seafood (0.5 km)',
+            'Kedai Ombak - Ikan Bakar (0.8 km)',
+            'Rumah Makan Nelayan (1.2 km)',
+            'Warung Sunset - Nasi Gudeg (0.3 km)',
+        ],
+        nearbySouvenirs: [
+            'Toko Oleh-oleh Pantai (0.5 km)',
+            'Kerajinan Kerang Sendiki (0.7 km)',
+            'Souvenir Malang Selatan (1.1 km)',
+            'Toko Kaos Pantai (0.4 km)',
+        ],
+    },
+
     // Wisata dengan awalan BRO
     {
+        id: 'bromo-tengger-semeru',
         name: 'Bromo Tengger Semeru',
         type: 'Wisata',
         location: 'Jawa Timur',
         rating: 4.8,
     },
     {
+        id: 'borobudur-temple',
         name: 'Borobudur Temple',
         type: 'Wisata',
         location: 'Yogyakarta',
         rating: 4.9,
     },
     {
+        id: 'bali-beach-resort',
         name: 'Bali Beach Resort',
         type: 'Wisata',
         location: 'Bali',
         rating: 4.7,
     },
-    { name: 'Braga Street', type: 'Wisata', location: 'Bandung', rating: 4.5 },
     {
+        id: 'braga-street',
+        name: 'Braga Street',
+        type: 'Wisata',
+        location: 'Bandung',
+        rating: 4.5,
+    },
+    {
+        id: 'bantul-heritage',
         name: 'Bantul Heritage',
         type: 'Wisata',
         location: 'Yogyakarta',
         rating: 4.3,
     },
     {
+        id: 'brooklyn-bridge-cafe',
         name: 'Brooklyn Bridge Cafe',
         type: 'Restoran',
         location: 'Jakarta',
         rating: 4.4,
     },
     {
+        id: 'brastagi-highland',
         name: 'Brastagi Highland',
         type: 'Wisata',
         location: 'Sumatera Utara',
@@ -299,20 +363,29 @@ const allDestinations = [
     },
 
     // Hotels
-    { name: 'Bali Resort Hotel', type: 'Hotel', location: 'Bali', rating: 4.8 },
     {
+        id: 'bali-resort-hotel',
+        name: 'Bali Resort Hotel',
+        type: 'Hotel',
+        location: 'Bali',
+        rating: 4.8,
+    },
+    {
+        id: 'bandung-plaza-hotel',
         name: 'Bandung Plaza Hotel',
         type: 'Hotel',
         location: 'Bandung',
         rating: 4.5,
     },
     {
+        id: 'bromo-view-hotel',
         name: 'Bromo View Hotel',
         type: 'Hotel',
         location: 'Jawa Timur',
         rating: 4.6,
     },
     {
+        id: 'bentani-hotel-cirebon',
         name: 'Bentani Hotel Cirebon',
         type: 'Hotel',
         location: 'Cirebon',
@@ -321,24 +394,28 @@ const allDestinations = [
 
     // Restoran
     {
+        id: 'bebek-bengil-restaurant',
         name: 'Bebek Bengil Restaurant',
         type: 'Restoran',
         location: 'Bali',
         rating: 4.7,
     },
     {
+        id: 'bakso-solo-pak-bambang',
         name: 'Bakso Solo Pak H. Bambang',
         type: 'Restoran',
         location: 'Solo',
         rating: 4.6,
     },
     {
+        id: 'burger-king-bandung',
         name: 'Burger King Bandung',
         type: 'Restoran',
         location: 'Bandung',
         rating: 4.1,
     },
     {
+        id: 'bebek-kaleyo',
         name: 'Bebek Kaleyo',
         type: 'Restoran',
         location: 'Jakarta',
@@ -346,20 +423,29 @@ const allDestinations = [
     },
 
     // Rental
-    { name: 'Bike Rental Bali', type: 'Rental', location: 'Bali', rating: 4.3 },
     {
+        id: 'bike-rental-bali',
+        name: 'Bike Rental Bali',
+        type: 'Rental',
+        location: 'Bali',
+        rating: 4.3,
+    },
+    {
+        id: 'boat-rental-bromo',
         name: 'Boat Rental Bromo',
         type: 'Rental',
         location: 'Jawa Timur',
         rating: 4.5,
     },
     {
+        id: 'bus-rental-bandung',
         name: 'Bus Rental Bandung',
         type: 'Rental',
         location: 'Bandung',
         rating: 4.2,
     },
     {
+        id: 'bmw-rental-jakarta',
         name: 'BMW Rental Jakarta',
         type: 'Rental',
         location: 'Jakarta',
@@ -455,11 +541,15 @@ const handleSuggestionClick = (suggestion) => {
     // Simpan ke recent searches
     addToRecentSearches(suggestion.name);
 
-    // Handle selection - bisa redirect atau emit event
     console.log('Selected:', suggestion);
 
-    // Contoh: emit ke parent component
-    // emit('destination-selected', suggestion)
+    // Emit event untuk navigasi ke detail (khusus untuk wisata)
+    if (suggestion.type === 'Wisata' && suggestion.id) {
+        emit('navigate-to-detail', suggestion);
+    }
+
+    // Emit ke parent component
+    emit('destination-selected', suggestion);
 };
 
 const handleSearch = () => {

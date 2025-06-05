@@ -41,16 +41,6 @@
                     </Link>
 
                     <Link
-                        href="/berita-update"
-                        class="nav-link"
-                        :class="{
-                            'active-nav-link': $page.url === '/berita-update',
-                        }"
-                    >
-                        Berita & Update
-                    </Link>
-
-                    <Link
                         href="/contact-us"
                         class="nav-link"
                         :class="{

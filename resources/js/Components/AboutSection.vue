@@ -12,7 +12,7 @@
                             />
                             <div class="shape-image float-bob-y">
                                 <img
-                                    src="assets/img/about/04.png"
+                                    src="/assets/img/utility.jpg"
                                     alt="Ramalan Cuaca"
                                 />
                             </div>

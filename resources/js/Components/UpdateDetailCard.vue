@@ -5,17 +5,19 @@
             <div class="news-details-area">
                 <div class="row g-5">
                     <div class="blog-post-details">
-                        <div class="single-blog-post">
+                        <div class="single-blog-post" v-if="newsItem">
                             <div
                                 class="post-featured-thumb bg-cover"
-                                style="
-                                    background-image: url('assets/img/news/post-4.jpg');
-                                "
+                                :style="{
+                                    backgroundImage: `url('${newsItem.featuredImage}')`,
+                                }"
                             >
                                 <div class="post">
                                     <h3>
-                                        16
-                                        <span>Dec</span>
+                                        {{ newsItem.date.split(' ')[0] }}
+                                        <span>{{
+                                            newsItem.date.split(' ')[1]
+                                        }}</span>
                                     </h3>
                                 </div>
                             </div>
@@ -24,108 +26,42 @@
                                 <ul class="post-list d-flex align-items-center">
                                     <li>
                                         <i class="fa-regular fa-user"></i>
-                                        By Admin
+                                        By {{ newsItem.author }}
                                     </li>
                                     <li>
                                         <i class="fa-regular fa-comment"></i>
-                                        2 Comments
+                                        {{ newsItem.comments }} Comments
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-tag"></i>
-                                        Tour
+                                        {{ newsItem.category }}
                                     </li>
                                 </ul>
-                                <h3>Get Best Advertiser in Your Side Pocket</h3>
-                                <p class="mb-3">
-                                    Consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore of
-                                    magna aliqua. Ut enim ad minim veniam, made
-                                    of owl the quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea dolor commodo
-                                    consequat. Duis aute irure and dolor in
-                                    reprehenderit.
-                                </p>
-                                <p class="mb-3">
-                                    The is ipsum dolor sit amet consectetur
-                                    adipiscing elit. Fusce eleifend porta arcu
-                                    In hac habitasse the is platea augue
-                                    thelorem turpoi dictumst. In lacus libero
-                                    faucibus at malesuada sagittis placerat eros
-                                    sed istincidunt augue ac ante rutrum sed the
-                                    is sodales augue consequat.
-                                </p>
-                                <div class="row g-4">
-                                    <div class="col-lg-6">
-                                        <div class="details-image">
-                                            <img
-                                                src="assets/img/news/post-5.jpg"
-                                                alt="img"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="details-image">
-                                            <img
-                                                src="assets/img/news/post-6.jpg"
-                                                alt="img"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="pt-4">
-                                    The is ipsum dolor sit amet consectetur
-                                    adipiscing elit. Fusce eleifend porta arcu
-                                    In hac habitasse the is platea augue
-                                    thelorem turpoi dictumst. In lacus libero
-                                    faucibus at malesuada sagittis placerat eros
-                                    sed istincidunt augue ac ante rutrum sed the
-                                    is sodales augue consequat.
-                                </p>
-                                <div class="hilight-text mb-4 mt-4">
-                                    <p>
-                                        Pellentesque sollicitudin congue dolor
-                                        non aliquam. Morbi volutpat, nisi vel
-                                        ultricies <br />
-                                        urnacondimentum, sapien neque lobortis
-                                        tortor, quis efficitur mi ipsum eu
-                                        metus. <br />
-                                        Praesent eleifend orci sit amet est
-                                        vehicula.
-                                    </p>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="36"
-                                        height="36"
-                                        viewBox="0 0 36 36"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M7.71428 20.0711H0.5V5.64258H14.9286V20.4531L9.97665 30.3568H3.38041L8.16149 20.7947L8.5233 20.0711H7.71428Z"
-                                            stroke="#63AB45"
-                                        />
-                                        <path
-                                            d="M28.2846 20.0711H21.0703V5.64258H35.4989V20.4531L30.547 30.3568H23.9507L28.7318 20.7947L29.0936 20.0711H28.2846Z"
-                                            stroke="#63AB45"
-                                        />
-                                    </svg>
-                                </div>
-                                <p class="mb-5 mt-4">
-                                    Consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore of
-                                    magna aliqua. Ut enim ad minim veniam, made
-                                    of owl the quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea dolor commodo
-                                    consequat. Duis aute irure and dolor in
-                                    reprehenderit.
-                                </p>
+                                <h3>{{ newsItem.title }}</h3>
+                                <div v-html="newsItem.content"></div>
                             </div>
                         </div>
-                        <div class="row tag-share-wrap mb-5 mt-4">
+
+                        <!-- Loading state -->
+                        <div v-else class="py-5 text-center">
+                            <h3>Loading...</h3>
+                        </div>
+
+                        <!-- Tags and Share Section -->
+                        <div
+                            class="row tag-share-wrap mb-5 mt-4"
+                            v-if="newsItem"
+                        >
                             <div class="col-lg-8 col-12">
                                 <div class="tagcloud">
-                                    <a href="news-details.html">Travel</a>
-                                    <a href="news-details.html">Services</a>
-                                    <a href="news-details.html">Agency</a>
+                                    <a
+                                        v-for="tag in newsItem.tags"
+                                        :key="tag"
+                                        href="#"
+                                        @click.prevent
+                                    >
+                                        {{ tag }}
+                                    </a>
                                 </div>
                             </div>
                             <div
@@ -133,24 +69,33 @@
                             >
                                 <div class="social-share">
                                     <span class="me-3">Share:</span>
-                                    <a href="#"
+                                    <a href="#" @click.prevent="shareOnFacebook"
                                         ><i class="fab fa-facebook-f"></i
                                     ></a>
-                                    <a href="#"
+                                    <a href="#" @click.prevent="shareOnTwitter"
                                         ><i class="fab fa-twitter"></i
                                     ></a>
-                                    <a href="#"
+                                    <a href="#" @click.prevent="shareOnLinkedIn"
                                         ><i class="fab fa-linkedin-in"></i
                                     ></a>
-                                    <a href="#"
-                                        ><i class="fa-brands fa-youtube"></i
+                                    <a href="#" @click.prevent="copyLink"
+                                        ><i class="fa-regular fa-link"></i
                                     ></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="comments-area">
+
+                        <!-- Comments Section -->
+                        <div class="comments-area" v-if="newsItem">
                             <div class="comments-heading">
-                                <h3>02 Comments</h3>
+                                <h3>
+                                    {{
+                                        newsItem.comments
+                                            .toString()
+                                            .padStart(2, '0')
+                                    }}
+                                    Comments
+                                </h3>
                             </div>
                             <div
                                 class="blog-single-comment d-flex gap-4 pb-4 pt-4"
@@ -167,7 +112,7 @@
                                     >
                                         <div class="con">
                                             <h5>
-                                                <a href="news-details.html"
+                                                <a href="#" @click.prevent
                                                     >Leslie Alexander</a
                                                 >
                                             </h5>
@@ -176,9 +121,7 @@
                                                 pm</span
                                             >
                                         </div>
-                                        <a
-                                            href="news-details.html"
-                                            class="reply"
+                                        <a href="#" @click.prevent class="reply"
                                             >Reply</a
                                         >
                                     </div>
@@ -206,7 +149,7 @@
                                     >
                                         <div class="con">
                                             <h5>
-                                                <a href="news-details.html"
+                                                <a href="#" @click.prevent
                                                     >Ralph Edwards</a
                                                 >
                                             </h5>
@@ -215,9 +158,7 @@
                                                 pm</span
                                             >
                                         </div>
-                                        <a
-                                            href="news-details.html"
-                                            class="reply"
+                                        <a href="#" @click.prevent class="reply"
                                             >Reply</a
                                         >
                                     </div>
@@ -231,18 +172,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="comment-form-wrap pt-5">
+
+                        <!-- Comment Form -->
+                        <div class="comment-form-wrap pt-5" v-if="newsItem">
                             <h3>Leave a comments</h3>
-                            <form action="#" id="contact-form" method="POST">
+                            <form
+                                @submit.prevent="submitComment"
+                                id="contact-form"
+                            >
                                 <div class="row g-4">
                                     <div class="col-lg-6">
                                         <div class="form-clt">
                                             <span>Your Name*</span>
                                             <input
                                                 type="text"
-                                                name="name"
+                                                v-model="commentForm.name"
                                                 id="name"
                                                 placeholder="Your Name"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -250,10 +197,11 @@
                                         <div class="form-clt">
                                             <span>Your Email*</span>
                                             <input
-                                                type="text"
-                                                name="email"
+                                                type="email"
+                                                v-model="commentForm.email"
                                                 id="email6"
                                                 placeholder="Your Email"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -261,21 +209,98 @@
                                         <div class="form-clt">
                                             <span>Message*</span>
                                             <textarea
-                                                name="message"
+                                                v-model="commentForm.message"
                                                 id="message"
                                                 placeholder="Write Message"
+                                                required
                                             ></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <button type="submit" class="theme-btn">
-                                            post comment<i
+                                        <button
+                                            type="submit"
+                                            class="theme-btn"
+                                            :disabled="isSubmitting"
+                                        >
+                                            {{
+                                                isSubmitting
+                                                    ? 'Posting...'
+                                                    : 'post comment'
+                                            }}
+                                            <i
                                                 class="fa-solid fa-arrow-right-long"
                                             ></i>
                                         </button>
                                     </div>
                                 </div>
                             </form>
+                        </div>
+
+                        <!-- Related News Section -->
+                        <div
+                            class="related-news mt-5"
+                            v-if="relatedNews.length > 0"
+                        >
+                            <h3 class="mb-4">Related Articles</h3>
+                            <div class="row g-4">
+                                <div
+                                    v-for="related in relatedNews"
+                                    :key="related.id"
+                                    class="col-lg-4 col-md-6"
+                                >
+                                    <div class="news-card-items-3 mt-0">
+                                        <div class="news-image">
+                                            <img
+                                                :src="related.image"
+                                                :alt="related.title"
+                                            />
+                                        </div>
+                                        <div class="news-content">
+                                            <ul class="post-meta">
+                                                <li class="post">
+                                                    {{ related.date }}
+                                                </li>
+                                                <li>
+                                                    <i
+                                                        class="fa-regular fa-user"
+                                                    ></i>
+                                                    By {{ related.author }}
+                                                </li>
+                                                <li>
+                                                    <i
+                                                        class="fa-regular fa-tag"
+                                                    ></i>
+                                                    {{ related.category }}
+                                                </li>
+                                            </ul>
+                                            <h4>
+                                                <Link
+                                                    :href="
+                                                        route('detail-update', {
+                                                            id: related.id,
+                                                        })
+                                                    "
+                                                >
+                                                    {{ related.title }}
+                                                </Link>
+                                            </h4>
+                                            <Link
+                                                :href="
+                                                    route('detail-update', {
+                                                        id: related.id,
+                                                    })
+                                                "
+                                                class="link-btn"
+                                            >
+                                                Read More
+                                                <i
+                                                    class="fa-sharp fa-regular fa-arrow-right"
+                                                ></i>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -284,4 +309,167 @@
     </section>
 </template>
 
-<script></script>
+<script>
+import { Link } from '@inertiajs/vue3';
+import { getNewsById, getRelatedNews } from '../../data/news.js';
+
+export default {
+    components: {
+        Link,
+    },
+
+    props: {
+        newsId: {
+            type: [String, Number],
+            required: true,
+        },
+    },
+
+    data() {
+        return {
+            newsItem: null,
+            relatedNews: [],
+            commentForm: {
+                name: '',
+                email: '',
+                message: '',
+            },
+            isSubmitting: false,
+        };
+    },
+
+    mounted() {
+        this.loadNews();
+    },
+
+    watch: {
+        newsId() {
+            this.loadNews();
+        },
+    },
+
+    methods: {
+        loadNews() {
+            // Get news item by ID
+            this.newsItem = getNewsById(this.newsId);
+
+            // Get related news
+            if (this.newsItem) {
+                this.relatedNews = getRelatedNews(
+                    this.newsId,
+                    this.newsItem.category,
+                    3,
+                );
+            }
+        },
+
+        submitComment() {
+            this.isSubmitting = true;
+
+            // Simulate form submission
+            setTimeout(() => {
+                alert('Comment submitted successfully!');
+                this.commentForm = {
+                    name: '',
+                    email: '',
+                    message: '',
+                };
+                this.isSubmitting = false;
+            }, 1000);
+        },
+
+        shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(this.newsItem.title);
+            window.open(
+                `https://www.facebook.com/sharer/sharer.php?u=${url}&t=${title}`,
+                '_blank',
+            );
+        },
+
+        shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(this.newsItem.title);
+            window.open(
+                `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
+                '_blank',
+            );
+        },
+
+        shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(this.newsItem.title);
+            window.open(
+                `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}`,
+                '_blank',
+            );
+        },
+
+        copyLink() {
+            navigator.clipboard
+                .writeText(window.location.href)
+                .then(() => {
+                    alert('Link copied to clipboard!');
+                })
+                .catch(() => {
+                    alert('Failed to copy link');
+                });
+        },
+    },
+};
+</script>
+
+<style scoped>
+.related-news .news-card-items-3 {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.related-news .news-card-items-3:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.theme-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.tagcloud a {
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 5px 5px 5px 0;
+    background-color: #f8f9fa;
+    color: #666;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.tagcloud a:hover {
+    background-color: #63ab45;
+    color: white;
+}
+
+.social-share a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 0 5px;
+    background-color: #f8f9fa;
+    color: #666;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-share a:hover {
+    background-color: #63ab45;
+    color: white;
+    transform: translateY(-2px);
+}
+</style>
